@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8"><title>评论订单</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head><body>
+  <h2>提交评论</h2>
+  <form id="f">
+    <input id="orderId" placeholder="订单ID" required>
+    <input id="rating" type="number" min="1" max="5" placeholder="评分" required>
+    <textarea id="comment" placeholder="评论内容" required></textarea>
+    <button type="submit">提交</button>
+  </form>
+  <script>
+    document.getElementById('f').addEventListener('submit', async e => {
+      e.preventDefault();
+      const customerId = localStorage.getItem('userId');
+      const orderId    = document.getElementById('orderId').value;
+      const rating     = document.getElementById('rating').value;
+      const comment    = document.getElementById('comment').value;
+      const res = await fetch('http://localhost:3000/api/review', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ orderId, customerId, rating, comment })
+      });
+      const d = await res.json();
+      alert(d.message);
+    });
+  </script>
+</body></html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8"><title>当日报表</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head><body>
+  <h2>当日报表</h2>
+  <button id="btn">加载</button>
+  <div id="out"></div>
+  <script>
+    document.getElementById('btn').onclick = async () => {
+      const res = await fetch('http://localhost:3000/api/report/daily');
+      const d = await res.json();
+      document.getElementById('out').textContent =
+        `订单数：${d.totalOrders}，收入：${d.totalRevenue}`;
+    };
+  </script>
+</body></html>

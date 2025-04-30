@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8"><title>支付下单</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head><body>
+  <h2>支付下单</h2>
+  <form id="frm">
+    <input id="merchantId" placeholder="商户ID" required>
+    <input id="amount" type="number" step="0.01" placeholder="金额" required>
+    <button type="submit">提交</button>
+  </form>
+  <script>
+    document.getElementById('frm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const customerId = localStorage.getItem('userId');
+      const merchantId = document.getElementById('merchantId').value;
+      const amount     = document.getElementById('amount').value;
+      const res = await fetch('http://localhost:3000/api/order', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ customerId, merchantId, amount })
+      });
+      const d = await res.json();
+      alert('创建订单 ID=' + d.id);
+    });
+  </script>
+</body></html>

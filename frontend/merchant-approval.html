@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8"><title>商户审批</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head><body>
+  <h2>商户审批</h2>
+  <ul id="list"></ul>
+  <script>
+    async function load() {
+      const res = await fetch('http://localhost:3000/api/merchants/pending');
+      const arr = await res.json();
+      const ul = document.getElementById('list');
+      ul.innerHTML = '';
+      arr.forEach(m => {
+        const li = document.createElement('li');
+        li.textContent = m.name + ' ';
+        const btn = document.createElement('button');
+        btn.textContent = '批准';
+        btn.onclick = async () => {
+          await fetch(`http://localhost:3000/api/merchant/approve/${m.id}`, { method:'POST' });
+          load();
+        };
+        li.appendChild(btn);
+        ul.appendChild(li);
+      });
+    }
+    load();
+  </script>
+</body></html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8"><title>控制面板</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head><body>
+  <h2>欢迎，ID=<span id="uid"></span> （<span id="urole"></span>）</h2>
+  <ul>
+    <li><a href="payment.html">支付下单</a></li>
+    <li><a href="merchant-approval.html">商户审批</a></li>
+    <li><a href="daily-report.html">当日报表</a></li>
+    <li><a href="driver-orders.html">司机接单</a></li>
+    <li><a href="review.html">评价订单</a></li>
+    <li><a href="financial-report.html">财务月报</a></li>
+  </ul>
+  <script>
+    document.getElementById('uid').textContent = localStorage.getItem('userId');
+    document.getElementById('urole').textContent = localStorage.getItem('role');
+  </script>
+</body></html>

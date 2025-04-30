@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>注册</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <h2>注册</h2>
+  <form onsubmit="doRegister(event)">
+    <label for="reg-username">用户名</label>
+    <input id="reg-username" placeholder="用户名" required>
+
+    <label for="reg-password">密码</label>
+    <input id="reg-password" type="password" placeholder="密码" required>
+
+    <label for="reg-role">角色</label>
+    <select id="reg-role">
+      <option value="customer">客户</option>
+      <option value="merchant">商户</option>
+      <option value="driver">司机</option>
+      <option value="admin">管理员</option>
+    </select>
+
+    <button type="submit">注册</button>
+  </form>
+  <p>已有账号？<a href="login.html">去登录</a></p>
+  <script src="assets/script.js"></script>
+</body>
+</html>
+
+
+
+
+
+

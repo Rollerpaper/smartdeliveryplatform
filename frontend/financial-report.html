@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8"><title>财务月报</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head><body>
+  <h2>财务月报</h2>
+  <button id="gen">生成本月报表</button>
+  <ul id="list"></ul>
+  <script>
+    async function loadReports() {
+      const res = await fetch('http://localhost:3000/api/reports');
+      const arr = await res.json();
+      const ul = document.getElementById('list');
+      ul.innerHTML = '';
+      arr.forEach(r => {
+        const li = document.createElement('li');
+        li.textContent = `${r.period}：￥${r.totalRevenue}（${r.totalOrders} 单）`;
+        ul.appendChild(li);
+      });
+    }
+    document.getElementById('gen').onclick = async () => {
+      await fetch('http://localhost:3000/api/report/monthly', { method:'POST' });
+      loadReports();
+    };
+    loadReports();
+  </script>
+</body></html>

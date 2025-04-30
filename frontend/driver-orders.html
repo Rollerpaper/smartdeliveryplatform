@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8"><title>司机接单</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head><body>
+  <h2>司机接单</h2>
+  <ul id="list"></ul>
+  <script>
+    async function load() {
+      const res = await fetch('http://localhost:3000/api/orders/pending');
+      const arr = await res.json();
+      const ul = document.getElementById('list');
+      ul.innerHTML = '';
+      arr.forEach(o => {
+        const li = document.createElement('li');
+        li.textContent = `ID:${o.id} ￥${o.amount} `;
+        const btn = document.createElement('button');
+        btn.textContent = '接单';
+        btn.onclick = async () => {
+          await fetch(`http://localhost:3000/api/order/accept/${o.id}`, { method:'POST' });
+          load();
+        };
+        li.appendChild(btn);
+        ul.appendChild(li);
+      });
+    }
+    load();
+  </script>
+</body></html>
